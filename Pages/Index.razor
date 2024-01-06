@@ -1,0 +1,32 @@
+﻿@page "/"
+
+<h1>1 Billion Row Challenge</h1>
+
+@if (!supported)
+{
+    <p>
+        The File System Access API is not supported in this browser.
+    </p>
+    return;
+}
+
+<h2>Input</h2>
+@if (reading)
+{
+    <p>Reading ...</p>
+}
+else
+{
+    <button @onclick=ReadFile>Open file</button>
+}
+
+<h2>Output</h2>
+<pre>
+<code>@output</code>
+</pre>
+@if (time is not null)
+{
+    <p>Read and computed in @time milliseconds</p>
+}
+
+@localTimings
