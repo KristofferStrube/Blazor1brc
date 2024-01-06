@@ -1,4 +1,4 @@
-﻿# 1🐝🏎 with Blazor 🔥
+﻿# 1️⃣🐝🏎 with Blazor 🔥
 
 My attempt at The One Billion Row Challenge using Blazor WASM and the File System Access API.
 
