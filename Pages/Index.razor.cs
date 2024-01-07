@@ -17,7 +17,6 @@ public partial class Index
     private bool reading;
     private string output = "";
     private long? time;
-    private string localTimings = "";
 
     [Inject]
     public required IFileSystemAccessServiceInProcess FileSystemAccessService { get; set; }
