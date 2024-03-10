@@ -68,17 +68,16 @@ public partial class Index
 
         while (true)
         {
-            ReadableStreamReadResultInProcess read = await reader.ReadAsync();
+            await using ReadableStreamReadResultInProcess read = await reader.ReadAsync();
             if (read.Done)
             {
                 break;
             }
-            Uint8Array value = await Uint8Array.CreateAsync(JSRuntime, read.Value);
-            byte[] bytes = await value.GetAsArrayAsync();
+            await using IJSInProcessObjectReference jsValue = (IJSInProcessObjectReference)read.Value;
+            await using Uint8ArrayInProcess value = await Uint8ArrayInProcess.CreateAsync(JSRuntime, jsValue);
+            byte[] bytes = value.AsArray;
             bytesRead += bytes.LongLength;
             ProcessCharacters(Encoding.UTF8.GetChars(bytes));
-            await value.JSReference.DisposeAsync();
-            await read.JSReference.DisposeAsync();
         }
 
         StringBuilder resultBuilder = new(10000);
